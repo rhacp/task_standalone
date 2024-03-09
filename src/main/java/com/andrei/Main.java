@@ -8,14 +8,18 @@ import com.andrei.utils.properties.PropertiesLoader;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 
+@Slf4j
+@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
@@ -27,7 +31,7 @@ public class Main {
 
         String callResult = makeCallToRestEndpoint(input.getOperation_number(), result);
 
-        System.out.println(callResult);
+        log.info(callResult);
     }
 
     /**
@@ -41,7 +45,10 @@ public class Main {
                 .build();
 
         try {
-            return objectMapper.readValue(new URL("file:src/main/resources/input.json"), Input.class);
+            Input input = objectMapper.readValue(new ClassPathResource("input.json").getURL(), Input.class);
+            log.info("JSON file mapped to Input object successfully.");
+
+            return input;
         } catch (IOException e) {
             throw new MalformedJSONException("The JSON file is not properly edited. Malformed JSON.");
         }
@@ -56,6 +63,8 @@ public class Main {
         if (input.getOperation_number() == null || input.getInput_array() == null || input.getInput_array().isEmpty()) {
             throw new BadInputException("The input file has a null \"operation_number\" or \"input_array\".");
         }
+
+        log.info("Input checked for null values.");
     }
 
     /**
@@ -75,11 +84,13 @@ public class Main {
             }
         }
 
+        log.info("Calculations done. Result ready.");
+
         return result;
     }
 
     /**
-     * Makes the call to the REST endpoint from the "application.yaml" file.
+     * Makes the call to the REST endpoint from the "application.yaml" file along with the initial "operation_number".
      * @param operation_number operation number.
      * @param result result of the calculations.
      */
@@ -93,12 +104,18 @@ public class Main {
 
         WebClient client = WebClient.create();
 
-        return client.post()
+        String callResponse = client.post()
                 .uri(callUrl)
+                .header("Accept-Language", properties.getProperty("header"))
+                .header("Operation-Number", Integer.toString(test.intValue()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(resultObject), Result.class)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
+
+        log.info("Call to the REST endpoint successfully made.");
+
+        return callResponse;
     }
 }

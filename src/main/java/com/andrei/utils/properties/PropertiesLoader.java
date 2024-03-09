@@ -6,6 +6,8 @@ import java.util.Properties;
 
 public class PropertiesLoader {
 
+    PropertiesLoader() {}
+
     /**
      * Reads the configuration file ("application.yaml" or "application.properties") and converts the properties to variables.
      * @param resourceFileName file path

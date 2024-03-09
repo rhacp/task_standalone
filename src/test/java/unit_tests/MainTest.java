@@ -1,6 +1,6 @@
 package unit_tests;
 
-public class Main {
+public class MainTest {
 
 
 }
