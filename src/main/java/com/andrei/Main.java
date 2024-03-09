@@ -21,7 +21,7 @@ import java.util.Properties;
 public class Main {
 
     public static void main(String[] args) {
-        Input input = getConvertJsonToInput();
+        Input input = getJsonConvertedToInput();
 
         checkForNullInput(input);
 
@@ -33,11 +33,11 @@ public class Main {
     }
 
     /**
-     * Converts input.json to Input object type.
+     * Converts input.json to Input object class.
      * @return Input converted Input object
-     * @exception com.andrei.exceptions.MalformedJSONException; if the file is not in a correct JSON format or if not edited properly.
+     * @exception com.andrei.exceptions.MalformedJSONException; malformed JSON
      */
-    public static Input getConvertJsonToInput() {
+    public static Input getJsonConvertedToInput() {
         ObjectMapper objectMapper = JsonMapper.builder()
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
                 .build();
@@ -53,9 +53,9 @@ public class Main {
     }
 
     /**
-     * Checks input object.
-     * @param input Input object.
-     * @exception BadInputException ; if any property is null.
+     * Checks input object for null attribute values.
+     * @param input input object
+     * @exception BadInputException ; if any attribute is null
      */
     public static void checkForNullInput(Input input) {
         if (input.getOperation_number() == null || input.getInput_array() == null || input.getInput_array().isEmpty()) {
@@ -66,11 +66,11 @@ public class Main {
     }
 
     /**
-     * Does the calculations according to the Input object.
+     * Does the calculations according to the given Input object.
      * @param input Input object.
      */
     public static Double calculation(Input input) {
-        Double result = input.getOperation_number();
+        Double result = 0D;
 
         for (int index = 0; index < input.getInput_array().size(); index++) {
             switch (input.getInput_array().get(index).getCommand()) {
@@ -89,14 +89,14 @@ public class Main {
 
     /**
      * Makes the call to the REST endpoint from the "application.yaml" file along with the initial "operation_number".
-     * @param operation_number operation number.
-     * @param result result of the calculations.
+     * @param operation_number operation number
+     * @param result result of the calculations
      */
-    public static String makeCallToRestEndpoint(Double operation_number, Double result) {
-        Double test = 80.3D;
+    public static String makeCallToRestEndpoint(Long operation_number, Double result) {
+        Long test = 80L;
 
-        Properties properties = PropertiesLoader.loadProperties("application.yaml");
-        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + Integer.toString(test.intValue()) + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
+        Properties properties = PropertiesLoader.loadProperties("application-dev.yaml");
+        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + test + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
 
         Result resultObject = new Result(result);
 
@@ -105,7 +105,7 @@ public class Main {
         String callResponse = client.post()
                 .uri(callUrl)
                 .header("Accept-Language", properties.getProperty("header"))
-                .header("Operation-Number", Integer.toString(test.intValue()))
+                .header("Operation-Number", Long.toString(test))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(resultObject), Result.class)
                 .retrieve()

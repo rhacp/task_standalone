@@ -1,4 +1,4 @@
-### Running the Project
+### Run the Project
 
 First, download the repository as a ZIP file and build the project with Maven.
 
@@ -43,5 +43,4 @@ Once the image is created, you can run the service in a Docker container called 
 * Java 17
 * Maven
 * Spring Boot
-* Lombok
 * Docker

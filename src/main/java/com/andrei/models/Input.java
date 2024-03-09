@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Input {
 
-    private Double operation_number;
+    private Long operation_number;
 
     private List<Operation> input_array;
 }
