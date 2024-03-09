@@ -1,4 +1,4 @@
-### Running the Service
+### Running the Project
 
 First, download the repository as a ZIP file and build the project with Maven.
 
