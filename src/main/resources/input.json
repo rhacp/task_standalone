@@ -3,6 +3,9 @@
   "input_array":[
     {"command":"append", "number": 22},
     {"command":"multiply", "number": 2},
-    {"command":"power", "number": 2}
+    {"command":"power", "number": 2},
+    {"command":"reduce", "number": 2937},
+    {"command":"multiply", "number": 4},
+    {"command":"divide", "number": 9}
   ]
 }
