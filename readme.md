@@ -2,14 +2,17 @@
 
 ## Running the Project
 
-First, download the repository as a ZIP file. Then, you can build the project with Maven and run the JAR file or create a Docker container based on the JAR file.
+First, download the repository as a ZIP file and build the project with Maven. 
+
+Then, you can directly run the JAR file or create a Docker container based on the JAR file.
 
 ---
 
 ### Build the Project with Maven
 
 1. Add the JSON input to the "src/main/resources/input.json" file.
-2. Ensure you are in the project's root directory. Then, build the project using Maven with the following command: `mvn clean package`
+2. Ensure you are in the project's root directory. Then, build the project using Maven with the following command: <br>
+`mvn clean package`
 3. Then, the calculations are made and the call to the REST endpoint is sent.
 
 ---
