@@ -1,6 +1,6 @@
 # CorePoint Logic Java Service
 
-## Running the Project
+## Running the Service
 
 First, download the repository as a ZIP file and build the project with Maven. 
 
@@ -20,7 +20,8 @@ Then, you can directly run the JAR file or create a Docker container based on th
 ### Run the JAR File
 
 1. Add the JSON input to the "src/main/resources/input.json" file.
-2. Ensure you are in the project's root directory. Then, run the JAR file using the following command: `java -jar target/task_standalone-1.0-SNAPSHOT.jar`
+2. Ensure you are in the project's root directory. Then, run the JAR file using the following command: <br>
+`java -jar target/task_standalone-1.0-SNAPSHOT.jar`
 3. Then, the calculations are made and the call to the REST endpoint is sent.
 
 ---
