@@ -1,5 +1,11 @@
 # CorePoint Logic Java Service
 
+## Running the Project
+
+First, download the repository as a ZIP file. Then, you can build the project with Maven and run the JAR file or create a Docker container based on the JAR file.
+
+---
+
 ### Build the Project with Maven
 
 1. Add the JSON input to the "src/main/resources/input.json" file.
