@@ -26,7 +26,7 @@ Ensure you are in the project's root directory. Then create a new Docker image n
 ##### Run Docker Image
 
 Once the image is created, you can run the service in a Docker container called `task-standalone` by using the following command:<br>
-`docker run -p 8080:8080 java-jokes-app`
+`docker run --name task-standalone task-standalone`
 
 ---
 
