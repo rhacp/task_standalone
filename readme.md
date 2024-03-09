@@ -30,12 +30,12 @@ Then, you can directly run the JAR file or create a Docker container based on th
 
 ##### Build Docker Image
 
-Ensure you are in the project's root directory. Then create a new Docker image named `task-standalone` with the following command:<br>
+Ensure you are in the project's root directory. Then create a new Docker image named "task-standalone" with the following command:<br>
 `docker build -t task-standalone .`
 
 ##### Run Docker Image
 
-Once the image is created, you can run the service in a Docker container called `task-standalone` by using the following command:<br>
+Once the image is created, you can run the service in a Docker container called "task-standalone" by using the following command:<br>
 `docker run --name task-standalone task-standalone`
 
 ---
