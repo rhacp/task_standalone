@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         Input input = getConvertJsonToInput();
 
-        checkForWrongInput(input);
+        checkForNullInput(input);
 
         Double result = calculation(input);
 
@@ -31,7 +31,7 @@ public class Main {
     }
 
     /**
-     * Convert input.json to Input object type.
+     * Converts input.json to Input object type.
      * @return Input converted Input object
      * @exception com.andrei.exceptions.MalformedJSONException; if the file is not in a correct JSON format or if not edited properly.
      */
@@ -48,13 +48,13 @@ public class Main {
     }
 
     /**
-     * Check input object.
+     * Checks input object.
      * @param input Input object.
      * @exception BadInputException ; if any property is null.
      */
-    public static void checkForWrongInput(Input input) {
+    public static void checkForNullInput(Input input) {
         if (input.getOperation_number() == null || input.getInput_array() == null || input.getInput_array().isEmpty()) {
-            throw new BadInputException("The input file has a null \"operation_numer\" or \"input_array\".");
+            throw new BadInputException("The input file has a null \"operation_number\" or \"input_array\".");
         }
     }
 
@@ -79,7 +79,7 @@ public class Main {
     }
 
     /**
-     * Make the call to the REST endpoint.
+     * Makes the call to the REST endpoint from the "application.yaml" file.
      * @param operation_number operation number.
      * @param result result of the calculations.
      */

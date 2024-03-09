@@ -7,7 +7,7 @@ import java.util.Properties;
 public class PropertiesLoader {
 
     /**
-     * Reads the "application.yaml" file and converts the properties to variables.
+     * Reads the configuration file ("application.yaml" or "application.properties") and converts the properties to variables.
      * @param resourceFileName file path
      * @exception RuntimeException malformed YAML
      */
