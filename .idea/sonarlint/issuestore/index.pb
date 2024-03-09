@@ -21,3 +21,8 @@ j
 :src/main/java/com/andrei/exceptions/BadInputException.java,e\c\ecf9ae0bedeaf101b59c48c525d30f1aad787593
 R
 "src/test/java/unit_tests/Main.java,c\9\c98c1ab739acb3fb8abec3b73240795e3b93f854
+9
+	readme.md,2\7\275d783e298228506068436512433d343feb52aa
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
