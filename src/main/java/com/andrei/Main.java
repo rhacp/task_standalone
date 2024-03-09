@@ -3,7 +3,7 @@ package com.andrei;
 import com.andrei.exceptions.BadInputException;
 import com.andrei.exceptions.MalformedJSONException;
 import com.andrei.models.Input;
-import com.andrei.models.Result;
+import com.andrei.models.Response;
 import com.andrei.utils.properties.PropertiesLoader;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +34,9 @@ public class Main {
 
     /**
      * Converts input.json to Input object class.
+     *
      * @return Input converted Input object
-     * @exception com.andrei.exceptions.MalformedJSONException; malformed JSON
+     * @throws com.andrei.exceptions.MalformedJSONException; malformed JSON
      */
     public static Input getJsonConvertedToInput() {
         ObjectMapper objectMapper = JsonMapper.builder()
@@ -54,8 +55,9 @@ public class Main {
 
     /**
      * Checks input object for null attribute values.
+     *
      * @param input input object
-     * @exception BadInputException ; if any attribute is null
+     * @throws BadInputException ; if any attribute is null
      */
     public static void checkForNullInput(Input input) {
         if (input.getOperation_number() == null || input.getInput_array() == null || input.getInput_array().isEmpty()) {
@@ -67,6 +69,7 @@ public class Main {
 
     /**
      * Does the calculations according to the given Input object.
+     *
      * @param input Input object.
      */
     public static Double calculation(Input input) {
@@ -89,25 +92,24 @@ public class Main {
 
     /**
      * Makes the call to the REST endpoint from the "application.yaml" file along with the initial "operation_number".
+     *
      * @param operation_number operation number
-     * @param result result of the calculations
+     * @param result           result of the calculations
      */
     public static String makeCallToRestEndpoint(Long operation_number, Double result) {
-        Long test = 80L;
-
         Properties properties = PropertiesLoader.loadProperties("application-dev.yaml");
-        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + test + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
+//        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + operation_number + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
 
-        Result resultObject = new Result(result);
+        Response response = new Response(result);
 
         WebClient client = WebClient.create();
 
         String callResponse = client.post()
                 .uri(callUrl)
                 .header("Accept-Language", properties.getProperty("header"))
-                .header("Operation-Number", Long.toString(test))
+                .header("Operation-Number", Long.toString(operation_number))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(resultObject), Result.class)
+                .body(Mono.just(response), Response.class)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

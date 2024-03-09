@@ -6,14 +6,16 @@ import java.util.Properties;
 
 public class PropertiesLoader {
 
-    PropertiesLoader() {}
+    PropertiesLoader() {
+    }
 
     /**
      * Reads the configuration file ("application.yaml" or "application.properties") and converts the properties to variables.
+     *
      * @param resourceFileName file path
-     * @exception RuntimeException malformed YAML
+     * @throws RuntimeException malformed YAML
      */
-    public static Properties loadProperties(String resourceFileName){
+    public static Properties loadProperties(String resourceFileName) {
         Properties configuration = new Properties();
 
         InputStream inputStream = PropertiesLoader.class
