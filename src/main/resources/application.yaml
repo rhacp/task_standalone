@@ -1,0 +1,7 @@
+#REST CALL
+#callUrlFirst: "https://test.com/api/"
+#callUrlSecond: "/result"
+
+#REST CALL TEST
+callUrlFirst: "http://localhost:"
+callUrlSecond: "/post"

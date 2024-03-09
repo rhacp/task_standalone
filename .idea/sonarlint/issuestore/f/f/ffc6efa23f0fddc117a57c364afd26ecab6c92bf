@@ -1,0 +1,5 @@
+
+m	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍÃ‹Ã8Íùÿ‡â1
+L	java:S106"+Replace this use of System.out by a logger.(°‹±õýÿÿÿÿ8¢úÿ‡â1
+T
+java:S1172V"7Remove this unused method parameter "operation_number".(ÍÃ‹Ã8§úÿ‡â1
