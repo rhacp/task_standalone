@@ -59,7 +59,7 @@ public class Main {
     }
 
     /**
-     * Do the calculations according to the Input object.
+     * Does the calculations according to the Input object.
      * @param input Input object.
      */
     public static Double calculation(Input input) {
