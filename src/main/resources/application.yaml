@@ -1,4 +1,4 @@
 #REST CALL
-callUrlFirst: "https://test.com/api/"
+callUrlFirst: "https://dummy.com/api/"
 callUrlSecond: "/result"
 header: "en-US"

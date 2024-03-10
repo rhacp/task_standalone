@@ -97,8 +97,8 @@ public class Main {
      * @param result           result of the calculations
      */
     public static String makeCallToRestEndpoint(Long operation_number, Double result) {
-        Properties properties = PropertiesLoader.loadProperties("application-dev.yaml");
-//        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + operation_number + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
+        Properties properties = PropertiesLoader.loadProperties("application.yaml");
+        String callUrl = properties.getProperty("callUrlFirst").substring(1, properties.getProperty("callUrlFirst").length() - 1) + operation_number + properties.getProperty("callUrlSecond").substring(1, properties.getProperty("callUrlSecond").length() - 1);
 
         Response response = new Response(result);
 
@@ -106,7 +106,7 @@ public class Main {
 
         String callResponse = client.post()
                 .uri(callUrl)
-                .header("Accept-Language", properties.getProperty("header"))
+                .header("Accept-Language", properties.getProperty("header").substring(1, properties.getProperty("header").length() - 1))
                 .header("Operation-Number", Long.toString(operation_number))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(response), Response.class)
